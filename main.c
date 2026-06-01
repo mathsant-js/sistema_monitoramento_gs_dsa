@@ -2,12 +2,12 @@
 #include <windows.h>
 
 void utf8_terminal();
-void menu();
+void exibir_menu();
 
 int main() {
     utf8_terminal();
 
-    menu();
+    exibir_menu();
     return 0;
 }
 
@@ -16,10 +16,28 @@ void utf8_terminal() {
     SetConsoleCP(CP_UTF8);
 }
 
-void menu() {
+void exibir_menu() {
     printf("\n==== SISTEMA DE MONITORAMENTO ====\n");
     printf("1 - Inserir Dados\n");
     printf("2 - Visualizar Status\n");
     printf("3 - Executar Análise\n");
     printf("4 - Encerrar Sistema\n");
+}
+
+void menu_opcoes(int opcao) {
+    switch (opcao)
+    {
+    case 1:
+        /* code */
+        break;
+        
+    case 2:
+        break;
+
+    case 3:
+        break;
+
+    default:
+        break;
+    }
 }
