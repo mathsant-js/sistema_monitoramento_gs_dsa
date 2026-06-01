@@ -22,7 +22,6 @@ int pouca_comunicacao(int comunicacao);
 void exibir_status();
 void avaliar_status();
 void executar_analise();
-void exibir_relatorio_final();
 void exibir_historico();
 void encerrar_programa();
 
@@ -135,6 +134,11 @@ void limpar_buffer() {
 }
 
 void processar_dados() {
+    if (total_leituras >= MAX_LEITURAS) {
+        printf("\nERRO: Histórico cheio!\n");
+        return;
+    }
+
     printf("\nDigite a temperatura: ");
     temperatura = ler_float();
 
@@ -191,10 +195,10 @@ void avaliar_comunicacao() {
     } 
     else if (pouca_comunicacao(comunicacao))
     {
-        printf("\nCOMUNICACAÇÃO: Pouca comunicação\n");
+        printf("\nCOMUNICAÇÃO: Pouca comunicação\n");
     }
     else {
-        printf("\nCOMUNICAÇÃO: normal\n");
+        printf("\nCOMUNICAÇÃO: Normal\n");
     }
 }
 
@@ -223,6 +227,10 @@ int pouca_comunicacao(int comunicacao) {
 }
 
 void exibir_status() {
+    if (total_leituras == 0) {
+        printf("\nNenhuma leitura cadastrada!\n");
+        return;
+    }
     avaliar_status();
 }
 
@@ -234,6 +242,11 @@ void avaliar_status() {
 }
 
 void executar_analise() {
+    if (total_leituras == 0) {
+        printf("\nNenhuma leitura cadastrada!\n");
+        return;
+    }
+
     int riscos = 0;
 
     printf("\n==== ANÁLISE DA MISSÃO ====\n");
@@ -282,11 +295,24 @@ void executar_analise() {
     }
 }
 
-void exibir_relatorio_final() {
-    printf("\n\n==== RELATÓRIO FINAL ====\n");
-    printf("Temperatura: %.2f °C\n", temperatura);
-    printf("Energia: %d%%\n", energia);
-    printf("Comunicação: %d%%\n", comunicacao);
+void exibir_media_informacoes() {
+    float media_temperatura, soma_temperatura = 0;
+    int media_energia, media_comunicacao, soma_energia, soma_comunicacao = 0;
+    
+    for (int i = 0; i < total_leituras; i++) {
+        soma_temperatura += historico_temperatura[i];
+        soma_energia += historico_energia[i];
+        soma_comunicacao += historico_comunicacao[i];
+    }
+
+    media_temperatura = soma_temperatura / total_leituras;
+    media_energia = soma_energia / total_leituras;
+    media_comunicacao = soma_comunicacao / total_leituras;
+
+    printf("\nMédias");
+    printf("\nMédia da Temperatura: %.2f °C", media_temperatura);
+    printf("\nMédia da Energia: %d%%", media_energia);
+    printf("\nMédia da Comunicacao: %d%%\n", media_comunicacao);
 }
 
 void exibir_historico() {
@@ -313,6 +339,8 @@ void exibir_historico() {
         printf("Comunicação: %d%%\n",
                historico_comunicacao[i]);
     }
+
+    exibir_media_informacoes();
 }
 
 void encerrar_programa() {
