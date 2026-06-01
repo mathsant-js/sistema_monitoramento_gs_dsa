@@ -25,6 +25,13 @@ void executar_analise();
 void exibir_relatorio_final();
 void encerrar_programa();
 
+#define MAX_LEITURAS 10
+
+float historico_temperatura[MAX_LEITURAS];
+int historico_energia[MAX_LEITURAS];
+int historico_comunicacao[MAX_LEITURAS];
+
+int total_leituras = 0;
 float temperatura;
 int energia, comunicacao;
 
@@ -126,11 +133,25 @@ void processar_dados() {
     printf("\nDigite a temperatura: ");
     temperatura = ler_float();
 
-    printf("Digite a porcentagem de energia: ");
-    energia = ler_int();
+    do
+    {
+        printf("Digite a porcentagem de energia (0-100): ");
+        energia = ler_int();
+    } while (energia < 0 || energia > 100);
 
-    printf("Digite o status da comunicação: ");
-    comunicacao = ler_int();
+    do
+    {
+        printf("Digite a porcentagem da comunicação (0-100): ");
+        comunicacao = ler_int();
+    } while (comunicacao < 0 || comunicacao > 100);
+    
+    historico_temperatura[total_leituras] = temperatura;
+    historico_energia[total_leituras] = energia;
+    historico_comunicacao[total_leituras] = comunicacao;
+
+    total_leituras++;
+
+    printf("\nLeitura registrada com sucesso!\n");
 }
 
 void avaliar_temperatura() {
@@ -212,43 +233,47 @@ void executar_analise() {
 
     printf("\n==== ANÁLISE DA MISSÃO ====\n");
 
+    printf("Temperatura atual: %.2f °C\n", temperatura);
+    printf("Energia atual: %d%%\n", energia);
+    printf("Comunicação atual: %d%%\n\n", comunicacao);
+
     if (super_aquecimento(temperatura)) {
-        printf("ALERTA: Superaquecimento\n");
+        printf("[CRÍTICO] Superaquecimento\n");
         riscos += 2;
-    } else if (baixa_temperatura(temperatura))
-    {
-        printf("ALERTA: Congelamento\n");
+    }
+    else if (baixa_temperatura(temperatura)) {
+        printf("[ALERTA] Baixa temperatura\n");
         riscos++;
     }
 
     if (energia_baixa(energia)) {
-        printf("ALERTA: Energia crítica\n");
+        printf("[CRÍTICO] Energia crítica\n");
         riscos += 2;
-    } else if (energia_abaixo_recomendavel(energia))
-    {
-        printf("ALERTA: Energia abaixo do recomendável\n");
+    }
+    else if (energia_abaixo_recomendavel(energia)) {
+        printf("[ALERTA] Energia abaixo do recomendável\n");
         riscos++;
     }
 
     if (falha_comunicacao(comunicacao)) {
-        printf("ALERTA: Falha de comunicação\n");
+        printf("[CRÍTICO] Falha de comunicação\n");
         riscos += 2;
-    } else if (pouca_comunicacao(comunicacao))
-    {
-        printf("ALERTA: Pouca comunicação\n");
+    }
+    else if (pouca_comunicacao(comunicacao)) {
+        printf("[ALERTA] Comunicação instável\n");
         riscos++;
     }
 
-    printf("\nRiscos detectados: %d\n", riscos);
+    printf("\nPontuação de risco: %d\n", riscos);
 
     if (riscos == 0) {
-        printf("STATUS: OPERACIONAL\n");
+        printf("MISSÃO SEGURA\n");
     }
-    else if (riscos < 5) {
-        printf("STATUS: ATENÇÃO\n");
+    else if (riscos <= 2) {
+        printf("MISSÃO EM OBSERVAÇÃO\n");
     }
     else {
-        printf("STATUS: CRÍTICO\n");
+        printf("MISSÃO CRÍTICA\n");
     }
 }
 
