@@ -23,6 +23,7 @@ void exibir_status();
 void avaliar_status();
 void executar_analise();
 void exibir_relatorio_final();
+void exibir_historico();
 void encerrar_programa();
 
 #define MAX_LEITURAS 10
@@ -66,7 +67,8 @@ void exibir_menu() {
     printf("1 - Inserir Dados\n");
     printf("2 - Visualizar Status\n");
     printf("3 - Executar Análise\n");
-    printf("4 - Encerrar Sistema\n");
+    printf("4 - Histórico\n");
+    printf("5 - Encerrar Sistema\n");
     printf("Digite uma opção: ");
 }
 
@@ -86,9 +88,12 @@ void menu_opcoes(int opcao) {
         break;
 
     case 4:
-        encerrar_programa();
+        exibir_historico();
         break;
 
+    case 5:
+        encerrar_programa();
+        break;
     default:
         printf("Opção inválida!");
         break;
@@ -282,6 +287,32 @@ void exibir_relatorio_final() {
     printf("Temperatura: %.2f °C\n", temperatura);
     printf("Energia: %d%%\n", energia);
     printf("Comunicação: %d%%\n", comunicacao);
+}
+
+void exibir_historico() {
+
+    int i;
+
+    printf("\n==== HISTÓRICO ====\n");
+
+    if (total_leituras == 0) {
+        printf("Nenhuma leitura cadastrada.\n");
+        return;
+    }
+
+    for(i = 0; i < total_leituras; i++) {
+
+        printf("\nLeitura %d\n", i + 1);
+
+        printf("Temperatura: %.2f °C\n",
+               historico_temperatura[i]);
+
+        printf("Energia: %d%%\n",
+               historico_energia[i]);
+
+        printf("Comunicação: %d%%\n",
+               historico_comunicacao[i]);
+    }
 }
 
 void encerrar_programa() {
