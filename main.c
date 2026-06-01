@@ -9,13 +9,22 @@ int ler_int();
 float ler_float();
 void limpar_buffer();
 void processar_dados();
-void avaliar_temperatura(float temperatura);
-void avaliar_energia(int energia);
-void avaliar_comunicacao(int comunicacao);
+void avaliar_temperatura();
+void avaliar_energia();
+void avaliar_comunicacao();
 int super_aquecimento(float temperatura);
+int baixa_temperatura(float temperatura);
 int energia_baixa(int energia);
+int energia_abaixo_recomendavel(int energia);
 int falha_comunicacao(int comunicacao);
-void exibir_relatorio_final(float temperatura, int energia, int comunicacao);
+int pouca_comunicacao(int comunicacao);
+void exibir_status();
+void avaliar_status();
+void exibir_relatorio_final();
+void encerrar_programa();
+
+float temperatura;
+int energia, comunicacao;
 
 int main() {
     utf8_terminal();
@@ -49,6 +58,7 @@ void exibir_menu() {
     printf("2 - Visualizar Status\n");
     printf("3 - Executar Análise\n");
     printf("4 - Encerrar Sistema\n");
+    printf("Digite uma opção: ");
 }
 
 void menu_opcoes(int opcao) {
@@ -59,9 +69,15 @@ void menu_opcoes(int opcao) {
         break;
 
     case 2:
+        exibir_status();
         break;
 
     case 3:
+        // Executar análise
+        break;
+
+    case 4:
+        encerrar_programa();
         break;
 
     default:
@@ -105,9 +121,6 @@ void limpar_buffer() {
 }
 
 void processar_dados() {
-    float temperatura;
-    int energia, comunicacao;
-
     printf("\nDigite a temperatura: ");
     temperatura = ler_float();
 
@@ -116,31 +129,44 @@ void processar_dados() {
 
     printf("Digite o status da comunicação: ");
     comunicacao = ler_int();
-
-    avaliar_temperatura(temperatura);
-
-    avaliar_energia(energia);
-
-    avaliar_comunicacao(comunicacao);
-
-    exibir_relatorio_final(temperatura, energia, comunicacao);
 }
 
-void avaliar_temperatura(float temperatura) {
+void avaliar_temperatura() {
     if (super_aquecimento(temperatura)) {
-        printf("Risco de superaquecimento!");
+        printf("TEMPERATURA: Risco de superaquecimento!");
+    } 
+    else if (baixa_temperatura(temperatura))
+    {
+        printf("TEMPERATURA: Risco de congelamento dos sistemas!");
+    }
+    else {
+        printf("TEMPERATURA: Normal");
     }
 }
 
-void avaliar_energia(int energia) {
+void avaliar_energia() {
     if (energia_baixa(energia)) {
-        printf("Ativar modo de economia de energia");
+        printf("\nENERGIA: Ativar modo de economia de energia");
+    }
+    else if (energia_abaixo_recomendavel(energia))
+    {
+        printf("\nENERGIA: Abaixo do recomendável");
+    }
+    else {
+        printf("\nENERGIA: Normal");
     }
 }
 
-void avaliar_comunicacao(int comunicacao) {
+void avaliar_comunicacao() {
     if (falha_comunicacao(comunicacao)) {
-        printf("Falha de comunicação");
+        printf("\nCOMUNICAÇÃO: Falha de comunicação\n");
+    } 
+    else if (pouca_comunicacao(comunicacao))
+    {
+        printf("\nCOMUNICACAÇÃO: Pouca comunicação\n");
+    }
+    else {
+        printf("\nCOMUNICAÇÃO: normal\n");
     }
 }
 
@@ -148,17 +174,45 @@ int super_aquecimento(float temperatura) {
     return temperatura > 80;
 }
 
+int baixa_temperatura(float temperatura) {
+    return temperatura < 10;
+}
+
 int energia_baixa(int energia) {
     return energia < 20;
+}
+
+int energia_abaixo_recomendavel(int energia) {
+    return energia < 40;
 }
 
 int falha_comunicacao(int comunicacao) {
     return comunicacao == 0;
 }
 
-void exibir_relatorio_final(float temperatura, int energia, int comunicacao) {
+int pouca_comunicacao(int comunicacao) {
+    return comunicacao < 20;
+}
+
+void exibir_status() {
+    avaliar_status();
+}
+
+void avaliar_status() {
+    printf("\n==== STATUS ====\n");
+    avaliar_temperatura();
+    avaliar_energia();
+    avaliar_comunicacao();
+}
+
+void exibir_relatorio_final() {
     printf("\n\n==== RELATÓRIO FINAL ====\n");
     printf("Temperatura: %.2f °C\n", temperatura);
     printf("Energia: %d%%\n", energia);
     printf("Comunicação: %d%%\n", comunicacao);
+}
+
+void encerrar_programa() {
+    printf("\n\nPROGRAMA ENCERRADO\n\n");
+    exit(0);
 }
