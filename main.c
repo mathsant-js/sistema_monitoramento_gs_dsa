@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <windows.h>
 
 void utf8_terminal();
@@ -20,6 +21,7 @@ int falha_comunicacao(int comunicacao);
 int pouca_comunicacao(int comunicacao);
 void exibir_status();
 void avaliar_status();
+void executar_analise();
 void exibir_relatorio_final();
 void encerrar_programa();
 
@@ -73,7 +75,7 @@ void menu_opcoes(int opcao) {
         break;
 
     case 3:
-        // Executar análise
+        executar_analise();
         break;
 
     case 4:
@@ -203,6 +205,51 @@ void avaliar_status() {
     avaliar_temperatura();
     avaliar_energia();
     avaliar_comunicacao();
+}
+
+void executar_analise() {
+    int riscos = 0;
+
+    printf("\n==== ANÁLISE DA MISSÃO ====\n");
+
+    if (super_aquecimento(temperatura)) {
+        printf("ALERTA: Superaquecimento\n");
+        riscos += 2;
+    } else if (baixa_temperatura(temperatura))
+    {
+        printf("ALERTA: Congelamento\n");
+        riscos++;
+    }
+
+    if (energia_baixa(energia)) {
+        printf("ALERTA: Energia crítica\n");
+        riscos += 2;
+    } else if (energia_abaixo_recomendavel(energia))
+    {
+        printf("ALERTA: Energia abaixo do recomendável\n");
+        riscos++;
+    }
+
+    if (falha_comunicacao(comunicacao)) {
+        printf("ALERTA: Falha de comunicação\n");
+        riscos += 2;
+    } else if (pouca_comunicacao(comunicacao))
+    {
+        printf("ALERTA: Pouca comunicação\n");
+        riscos++;
+    }
+
+    printf("\nRiscos detectados: %d\n", riscos);
+
+    if (riscos == 0) {
+        printf("STATUS: OPERACIONAL\n");
+    }
+    else if (riscos < 5) {
+        printf("STATUS: ATENÇÃO\n");
+    }
+    else {
+        printf("STATUS: CRÍTICO\n");
+    }
 }
 
 void exibir_relatorio_final() {
