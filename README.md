@@ -217,16 +217,49 @@ Abaixo estão as imagens dos fluxogramas do sistema:
 Abaixo estão as imagens da demonstração prática do sistema:
 
 ![1_insercao](demonstracao_pratica/1_insercao.png)
+
+<br>
+
 ![2_status](demonstracao_pratica/2_status.png)
+
+<br>
+
 ![3_insercao](demonstracao_pratica/3_insercao.png)
+
+<br>
+
 ![4_status](demonstracao_pratica/4_status.png)
-![5_analise_missao](demonstracao_pratica/5_analise_missao.png.png)
+
+<br>
+
+![5_analise_missao](demonstracao_pratica/5_analise_missao.png)
+
+<br>
+
 ![6_analise_missao](demonstracao_pratica/6_status_e_analise_missao.png)
+
+<br>
+
 ![7_insercao_e_status](demonstracao_pratica/7_insercao_e_status.png)
+
+<br>
+
 ![8_analise_missao](demonstracao_pratica/8_analise_missao.png)
+
+<br>
+
 ![9_insercao_e_analise_missao](demonstracao_pratica/9_insercao_e_analise_missao.png)
+
+<br>
+
 ![10_historico_missao](demonstracao_pratica/10_historico_missao.png)
+
+<br>
+
 ![11_historico_missao_com_media](demonstracao_pratica/11_historico_missao_com_media.png)
+
+<br>
+
 ![12_programa_encerrado](demonstracao_pratica/12_programa_encerrado.png)
 
 ## Tecnologias Utilizadas
