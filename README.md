@@ -196,27 +196,19 @@ Quando o usuário solicita a visualização do histórico, o sistema percorre os
 Além disso, calcula médias dos parâmetros monitorados para fornecer uma visão geral do comportamento da missão.
 
 
-## Fluxo Simplificado
+## Fluxogramas do Sistema
 
-```text
-Início
-   ↓
-Exibir Menu
-   ↓
-Ler Opção
-   ↓
-┌─────────────────────┐
-│ 1 - Inserir Dados   │
-│ 2 - Status          │
-│ 3 - Análise         │
-│ 4 - Histórico       │
-│ 5 - Encerrar        │
-└─────────────────────┘
-   ↓
-Executar Opção
-   ↓
-Retornar ao Menu
-```
+### Fluxograma Principal
+
+![Fluxograma Principal](fluxogramas/_Fluxograma_Principal_GS.png)
+
+### Fluxograma Inserção de Dados
+
+![Fluxograma de Inserção de Dados](fluxogramas/_Fluxograma_Insercao_Dados_GS.png)
+
+### Fluxograma de Análise da Missão
+
+![Fluxograma de Análise da Missão](fluxogramas/_Fluxograma_Analise_GS.png)
 
 ## Tecnologias Utilizadas
 
