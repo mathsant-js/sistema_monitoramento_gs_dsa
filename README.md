@@ -198,6 +198,8 @@ Além disso, calcula médias dos parâmetros monitorados para fornecer uma visã
 
 ## Fluxogramas do Sistema
 
+Abaixo estão as imagens dos fluxogramas do sistema:
+
 ### Fluxograma Principal
 
 ![Fluxograma Principal](fluxogramas/_Fluxograma_Principal_GS.png)
@@ -209,6 +211,23 @@ Além disso, calcula médias dos parâmetros monitorados para fornecer uma visã
 ### Fluxograma de Análise da Missão
 
 ![Fluxograma de Análise da Missão](fluxogramas/_Fluxograma_Analise_GS.png)
+
+## Demonstração Prática do Sistema
+
+Abaixo estão as imagens da demonstração prática do sistema:
+
+![1_insercao](demonstracao_pratica/1_insercao.png)
+![2_status](demonstracao_pratica/2_status.png)
+![3_insercao](demonstracao_pratica/3_insercao.png)
+![4_status](demonstracao_pratica/4_status.png)
+![5_analise_missao](demonstracao_pratica/5_analise_missao.png.png)
+![6_analise_missao](demonstracao_pratica/6_status_e_analise_missao.png)
+![7_insercao_e_status](demonstracao_pratica/7_insercao_e_status.png)
+![8_analise_missao](demonstracao_pratica/8_analise_missao.png)
+![9_insercao_e_analise_missao](demonstracao_pratica/9_insercao_e_analise_missao.png)
+![10_historico_missao](demonstracao_pratica/10_historico_missao.png)
+![11_historico_missao_com_media](demonstracao_pratica/11_historico_missao_com_media.png)
+![12_programa_encerrado](demonstracao_pratica/12_programa_encerrado.png)
 
 ## Tecnologias Utilizadas
 
